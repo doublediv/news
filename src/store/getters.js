@@ -1,8 +1,9 @@
-import state from "./states"
 const getters = {
-    getIsHeader(state){
-        console.log(state)
+    getIsHeader(state) {
         return state.isHeader
+    },
+    getIsLoading(state) {
+        return state.isLoading
     }
 }
 

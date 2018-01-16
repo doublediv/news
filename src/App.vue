@@ -2,12 +2,13 @@
   <div id="app">
     <v-header v-show="getIsHeader"></v-header>
     <transition name="fade" mode="out-in">
-      <keep-alive>
+      <keep-alive v-if="$route.meta.isKeepAlive">
         <router-view></router-view>
       </keep-alive>
+      <router-view v-if="!$route.meta.isKeepAlive"></router-view>
     </transition>
-
     <v-footer></v-footer>
+    <loading v-show="getIsLoading"></loading>
   </div>
 </template>
 
@@ -21,10 +22,28 @@ export default {
     vFooter: Footer
   },
   computed: {
-    ...mapGetters(['getIsHeader'])
+    ...mapGetters(["getIsHeader", "getIsLoading"])
   },
   mounted() {
-    console.log(this.getIsHeader)
+
+    // 刷新
+    this.showHeader(this.$route.meta.isHeader);
+  },
+  watch: {
+    $route(to) {
+      // 路由跳转
+      this.showHeader(to.meta.isHeader);
+    }
+  },
+  methods: {
+    ...mapActions(["HIDE_HEADER", "SHOW_HEADER"]),
+    showHeader(isHeader) {
+      if (isHeader) {
+        this.SHOW_HEADER();
+      } else {
+        this.HIDE_HEADER();
+      }
+    }
   }
 };
 </script>

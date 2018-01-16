@@ -1,8 +1,8 @@
 <template>
   <div class="content">
-      <div class="nav">
+      <div class="back">
           <ul>
-              <li class="l-btn" onclick="window.history.go(-1)"></li>
+              <li class="l-btn" @click="$router.back()"></li>
           </ul>
       </div>
       <div class="header clear">
@@ -64,7 +64,7 @@ export default {
 </script>
 
 <style scoped>
-.nav {
+.back {
   width: 100%;
   position: fixed;
   top: 0;
@@ -73,13 +73,13 @@ export default {
   border-bottom: 1px solid #e8eaec;
   z-index: 99;
 }
-.nav ul {
+.back ul {
   width: 6.4rem;
   height: 0.45rem;
   padding-top: 0.15rem;
   margin: 0 auto;
 }
-.nav ul li {
+.back ul li {
   width: 0.29rem;
   height: 0.31rem;
   background: url("~@/assets/img/history.png") no-repeat 0 0;
